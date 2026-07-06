@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prototipo WebAR Educativo</title>
 
-  <!-- <model-viewer> permite visualizar modelos 3D y activar AR desde navegador compatible. -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
@@ -19,9 +18,7 @@
       --border: #d9e1f2;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -48,23 +45,6 @@
       font-size: 1.05rem;
     }
 
-    .creator-credit {
-      margin-top: 10px;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    .creator-credit a {
-      color: var(--accent-dark);
-      text-decoration: none;
-      border-bottom: 2px solid rgba(31, 111, 235, 0.25);
-    }
-
-    .creator-credit a:hover {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-    }
-
     main {
       width: min(1100px, 94vw);
       margin: 0 auto 40px;
@@ -89,9 +69,7 @@
       background: linear-gradient(180deg, #ffffff, #eef3ff);
     }
 
-    .info-card {
-      padding: 22px;
-    }
+    .info-card { padding: 22px; }
 
     .info-card h2 {
       margin-top: 0;
@@ -107,14 +85,6 @@
       color: var(--accent-dark);
       font-size: 0.86rem;
       font-weight: 700;
-    }
-
-    .activity {
-      margin-top: 18px;
-      padding: 16px;
-      border-left: 4px solid var(--accent);
-      background: #f7faff;
-      border-radius: 14px;
     }
 
     .model-selector {
@@ -150,10 +120,15 @@
       font-size: 0.9rem;
     }
 
-    ol,
-    ul {
-      padding-left: 22px;
+    .activity {
+      margin-top: 18px;
+      padding: 16px;
+      border-left: 4px solid var(--accent);
+      background: #f7faff;
+      border-radius: 14px;
     }
+
+    ol, ul { padding-left: 22px; }
 
     .ar-button {
       background: var(--accent);
@@ -167,15 +142,30 @@
       box-shadow: 0 8px 20px rgba(31, 111, 235, 0.28);
     }
 
-    .ar-button:hover {
-      background: var(--accent-dark);
-    }
+    .ar-button:hover { background: var(--accent-dark); }
 
     .ar-note {
       display: block;
       margin-top: 12px;
       font-size: 0.9rem;
       color: var(--muted);
+    }
+
+    .creator-credit {
+      margin-top: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .creator-credit a {
+      color: var(--accent-dark);
+      text-decoration: none;
+      border-bottom: 2px solid rgba(31, 111, 235, 0.25);
+    }
+
+    .creator-credit a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
 
     footer {
@@ -186,36 +176,26 @@
       text-align: center;
     }
 
-    footer .creator-credit {
-      margin-bottom: 8px;
-    }
+    footer .creator-credit { margin-bottom: 8px; }
 
     @media (max-width: 850px) {
-      main {
-        grid-template-columns: 1fr;
-      }
-
-      model-viewer {
-        height: 62vh;
-        min-height: 380px;
-      }
+      main { grid-template-columns: 1fr; }
+      model-viewer { height: 62vh; min-height: 380px; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Prototipo WebAR Educativo</h1>
-    <p>
-      Visualiza un modelo 3D en navegador y actívalo en realidad aumentada desde un celular compatible.
-    </p>
+    <p>Visualiza modelos 3D en navegador y actívalos en realidad aumentada desde un celular compatible.</p>
   </header>
 
   <main>
     <section class="viewer-card" aria-label="Visor 3D con realidad aumentada">
       <model-viewer
         id="viewer"
-        src="models/Astronaut.glb"
-        alt="Modelo 3D educativo para exploración en realidad aumentada"
+        src="models/Heart.glb"
+        alt="Modelo 3D de corazón para exploración anatómica en realidad aumentada"
         ar
         ar-modes="webxr scene-viewer quick-look"
         camera-controls
@@ -226,30 +206,26 @@
         environment-image="neutral"
         poster="assets/poster-placeholder.svg">
 
-        <button class="ar-button" slot="ar-button">
-          Ver en realidad aumentada
-        </button>
+        <button class="ar-button" slot="ar-button">Ver en realidad aumentada</button>
       </model-viewer>
     </section>
 
     <aside class="info-card">
       <span class="tag">WebAR</span>
-      <span class="tag">Modelo 3D</span>
+      <span class="tag">Modelos 3D</span>
       <span class="tag">Prototipo educativo</span>
 
       <h2>Selecciona un modelo</h2>
       <div class="model-selector" aria-label="Selector de modelos 3D">
-        <button class="model-option active" data-src="models/Astronaut.glb" data-title="Astronauta" data-alt="Modelo 3D de astronauta para exploración en realidad aumentada">Astronauta</button>
-        <button class="model-option" data-src="models/Molecula.glb" data-title="Molécula" data-alt="Modelo 3D de molécula para exploración científica en realidad aumentada">Molécula</button>
-        <button class="model-option" data-src="models/Corazon.glb" data-title="Corazón" data-alt="Modelo 3D de corazón para exploración anatómica en realidad aumentada">Corazón</button>
-        <button class="model-option" data-src="models/Planeta.glb" data-title="Planeta" data-alt="Modelo 3D de planeta para exploración astronómica en realidad aumentada">Planeta</button>
+        <button class="model-option active" data-src="models/Heart.glb" data-title="Corazón" data-alt="Modelo 3D de corazón para exploración anatómica en realidad aumentada">Corazón</button>
+        <button class="model-option" data-src="models/Dentist%20Chair.glb" data-title="Silla de dentista" data-alt="Modelo 3D de silla de dentista para exploración de diseño, salud y equipamiento profesional">Silla de dentista</button>
+        <button class="model-option" data-src="models/Blocks%20Lab%20Equipment.glb" data-title="Equipo de química" data-alt="Modelo 3D de equipo de laboratorio para exploración científica en realidad aumentada">Equipo de química</button>
+        <button class="model-option" data-src="models/Drone.glb" data-title="Drone" data-alt="Modelo 3D de drone para exploración tecnológica en realidad aumentada">Drone</button>
       </div>
-      <p id="model-status" class="model-status">Modelo activo: Astronauta.</p>
+      <p id="model-status" class="model-status">Modelo activo: Corazón.</p>
 
       <h2>Actividad sugerida</h2>
-      <p>
-        Usa este prototipo para observar un objeto tridimensional, manipularlo y analizar cómo cambia la comprensión al verlo en escala espacial.
-      </p>
+      <p>Usa este prototipo para observar objetos tridimensionales, manipularlos y analizar cómo cambia la comprensión al verlos en escala espacial.</p>
 
       <div class="activity">
         <strong>Indicaciones para estudiantes</strong>
@@ -266,22 +242,16 @@
       <ul>
         <li>¿Qué detalles se comprenden mejor en 3D que en una imagen plana?</li>
         <li>¿Qué cambia cuando el objeto se observa en el espacio físico?</li>
-        <li>¿Cómo usarías este recurso para explicar un concepto científico?</li>
+        <li>¿Cómo usarías este recurso para explicar un concepto científico, técnico o profesional?</li>
       </ul>
 
-      <p class="ar-note">
-        Nota: el botón AR aparece en dispositivos compatibles. En computadora funciona como visor 3D.
-      </p>
+      <p class="ar-note">Nota: el botón AR aparece en dispositivos compatibles. En computadora funciona como visor 3D.</p>
     </aside>
   </main>
 
   <footer>
-    <p class="creator-credit">
-      Creado por <a href="https://www.instagram.com/olafrrom/" target="_blank" rel="noopener noreferrer">Olaf Román</a>
-    </p>
-    <p>
-      Proyecto base para crear visualizaciones educativas WebAR con HTML, modelos .glb y GitHub Pages.
-    </p>
+    <p class="creator-credit">Creado por <a href="https://www.instagram.com/olafrrom/" target="_blank" rel="noopener noreferrer">Olaf Román</a></p>
+    <p>Proyecto base para crear visualizaciones educativas WebAR con HTML, modelos .glb y GitHub Pages.</p>
   </footer>
 
   <script>
@@ -307,7 +277,7 @@
     viewer.addEventListener('error', () => {
       const activeButton = document.querySelector('.model-option.active');
       const title = activeButton ? activeButton.dataset.title : 'seleccionado';
-      status.textContent = `No se encontró el modelo ${title}. Sube el archivo correspondiente en la carpeta models/.`;
+      status.textContent = `No se pudo cargar el modelo ${title}. Revisa que el archivo exista en models/ y que el nombre coincida exactamente.`;
     });
   </script>
 </body>
