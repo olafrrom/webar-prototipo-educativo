@@ -48,6 +48,29 @@
       font-size: 1.05rem;
     }
 
+    .project-note {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .creator-credit {
+      margin-top: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .creator-credit a {
+      color: var(--accent-dark);
+      text-decoration: none;
+      border-bottom: 2px solid rgba(31, 111, 235, 0.25);
+    }
+
+    .creator-credit a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
     main {
       width: min(1100px, 94vw);
       margin: 0 auto 40px;
@@ -136,6 +159,10 @@
       text-align: center;
     }
 
+    footer .creator-credit {
+      margin-bottom: 8px;
+    }
+
     @media (max-width: 850px) {
       main {
         grid-template-columns: 1fr;
@@ -153,6 +180,12 @@
     <h1>Prototipo WebAR Educativo</h1>
     <p>
       Visualiza un modelo 3D en navegador y actívalo en realidad aumentada desde un celular compatible.
+    </p>
+    <p class="project-note">
+      Proyecto base para crear visualizaciones educativas WebAR con HTML, modelos .glb y GitHub Pages.
+    </p>
+    <p class="creator-credit">
+      Creado por <a href="https://www.instagram.com/olafrrom/" target="_blank" rel="noopener noreferrer">Olaf Román</a>
     </p>
   </header>
 
@@ -211,7 +244,12 @@
   </main>
 
   <footer>
-    Proyecto base para crear visualizaciones educativas WebAR con HTML, modelos .glb y GitHub Pages.
+    <p class="creator-credit">
+      Creado por <a href="https://www.instagram.com/olafrrom/" target="_blank" rel="noopener noreferrer">Olaf Román</a>
+    </p>
+    <p>
+      Proyecto base para crear visualizaciones educativas WebAR con HTML, modelos .glb y GitHub Pages.
+    </p>
   </footer>
 </body>
 </html>
