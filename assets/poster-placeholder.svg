@@ -1,0 +1,8 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#EEF3FF"/>
+  <circle cx="600" cy="360" r="150" fill="#DCE8FF"/>
+  <path d="M520 455L600 245L680 455H520Z" fill="#1F6FEB" opacity="0.92"/>
+  <circle cx="600" cy="515" r="34" fill="#174EA6"/>
+  <text x="600" y="650" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700" fill="#172033">Prototipo WebAR Educativo</text>
+  <text x="600" y="704" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#5B6475">Modelo 3D + Realidad Aumentada</text>
+</svg>
