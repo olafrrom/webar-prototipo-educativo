@@ -4,9 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prototipo WebAR Educativo</title>
-
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-
   <style>
     :root {
       --bg: #f5f7fb;
@@ -28,10 +26,13 @@
       line-height: 1.5;
     }
 
-    header {
-      padding: 28px 18px 16px;
+    header, footer {
+      width: min(1100px, 94vw);
+      margin: 0 auto;
       text-align: center;
     }
+
+    header { padding: 28px 18px 16px; }
 
     header h1 {
       margin: 0 0 8px;
@@ -45,52 +46,25 @@
       font-size: 1.05rem;
     }
 
-    main {
+    .model-panel {
       width: min(1100px, 94vw);
-      margin: 0 auto 40px;
-      display: grid;
-      grid-template-columns: 1.35fr 0.85fr;
-      gap: 20px;
-    }
-
-    .viewer-card,
-    .info-card {
+      margin: 10px auto 18px;
+      padding: 18px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 22px;
       box-shadow: 0 14px 40px rgba(21, 34, 66, 0.08);
-      overflow: hidden;
     }
 
-    model-viewer {
-      width: 100%;
-      height: 72vh;
-      min-height: 480px;
-      background: linear-gradient(180deg, #ffffff, #eef3ff);
-    }
-
-    .info-card { padding: 22px; }
-
-    .info-card h2 {
-      margin-top: 0;
-      font-size: 1.25rem;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 6px 10px;
-      margin: 0 6px 8px 0;
-      border-radius: 999px;
-      background: #eaf1ff;
-      color: var(--accent-dark);
-      font-size: 0.86rem;
-      font-weight: 700;
+    .model-panel h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
     }
 
     .model-selector {
       display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin: 16px 0 18px;
     }
 
     .model-option {
@@ -115,9 +89,51 @@
 
     .model-status {
       min-height: 22px;
-      margin: 8px 0 0;
+      margin: 12px 0 0;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+    }
+
+    main {
+      width: min(1100px, 94vw);
+      margin: 0 auto 40px;
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: 20px;
+    }
+
+    .viewer-card,
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: 0 14px 40px rgba(21, 34, 66, 0.08);
+      overflow: hidden;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 70vh;
+      min-height: 460px;
+      background: linear-gradient(180deg, #ffffff, #eef3ff);
+    }
+
+    .info-card { padding: 22px; }
+
+    .info-card h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      margin: 0 6px 8px 0;
+      border-radius: 999px;
+      background: #eaf1ff;
+      color: var(--accent-dark);
+      font-size: 0.86rem;
+      font-weight: 700;
     }
 
     .activity {
@@ -169,18 +185,15 @@
     }
 
     footer {
-      width: min(1100px, 94vw);
-      margin: 0 auto 28px;
+      margin-bottom: 28px;
       color: var(--muted);
       font-size: 0.9rem;
-      text-align: center;
     }
 
-    footer .creator-credit { margin-bottom: 8px; }
-
     @media (max-width: 850px) {
+      .model-selector { grid-template-columns: 1fr; }
       main { grid-template-columns: 1fr; }
-      model-viewer { height: 62vh; min-height: 380px; }
+      model-viewer { height: 56vh; min-height: 340px; }
     }
   </style>
 </head>
@@ -190,22 +203,36 @@
     <p>Visualiza modelos 3D en navegador y actívalos en realidad aumentada desde un celular compatible.</p>
   </header>
 
+  <section class="model-panel" aria-label="Selector de modelos 3D">
+    <h2>Selecciona un modelo</h2>
+    <div class="model-selector">
+      <button class="model-option active" data-src="models/Heart.glb" data-title="Corazón" data-alt="Modelo 3D de corazón para exploración anatómica en realidad aumentada">Corazón</button>
+      <button class="model-option" data-src="models/lkn.glb" data-title="Esqueleto" data-alt="Modelo 3D de esqueleto para exploración anatómica en realidad aumentada">Esqueleto</button>
+      <button class="model-option" data-src="models/VR%20Headset.glb" data-title="Casco de realidad virtual" data-alt="Modelo 3D de casco de realidad virtual para exploración de tecnología inmersiva">Casco de realidad virtual</button>
+      <button class="model-option" data-src="models/Dentist%20Chair.glb" data-title="Silla de dentista" data-alt="Modelo 3D de silla de dentista para exploración de diseño, salud y equipamiento profesional">Silla de dentista</button>
+      <button class="model-option" data-src="models/Blocks%20Lab%20Equipment.glb" data-title="Equipo de química" data-alt="Modelo 3D de equipo de laboratorio para exploración científica en realidad aumentada">Equipo de química</button>
+      <button class="model-option" data-src="models/Drone.glb" data-title="Drone" data-alt="Modelo 3D de drone para exploración tecnológica en realidad aumentada">Drone</button>
+    </div>
+    <p id="model-status" class="model-status">Modelo activo: Corazón.</p>
+  </section>
+
   <main>
     <section class="viewer-card" aria-label="Visor 3D con realidad aumentada">
       <model-viewer
         id="viewer"
-        src="models/lkn.glb"
-        alt="Modelo 3D de esqueleto para exploración anatómica en realidad aumentada"
+        src="models/Heart.glb"
+        alt="Modelo 3D de corazón para exploración anatómica en realidad aumentada"
         ar
         ar-modes="webxr scene-viewer quick-look"
         camera-controls
         touch-action="pan-y"
         auto-rotate
+        loading="eager"
+        reveal="auto"
         shadow-intensity="1"
         exposure="1"
         environment-image="neutral"
         poster="assets/poster-placeholder.svg">
-
         <button class="ar-button" slot="ar-button">Ver en realidad aumentada</button>
       </model-viewer>
     </section>
@@ -215,24 +242,13 @@
       <span class="tag">Modelos 3D</span>
       <span class="tag">Prototipo educativo</span>
 
-      <h2>Selecciona un modelo</h2>
-      <div class="model-selector" aria-label="Selector de modelos 3D">
-        <button class="model-option active" data-src="models/lkn.glb" data-title="Esqueleto" data-alt="Modelo 3D de esqueleto para exploración anatómica en realidad aumentada">Esqueleto</button>
-        <button class="model-option" data-src="models/Heart.glb" data-title="Corazón" data-alt="Modelo 3D de corazón para exploración anatómica en realidad aumentada">Corazón</button>
-        <button class="model-option" data-src="models/Dentist%20Chair.glb" data-title="Silla de dentista" data-alt="Modelo 3D de silla de dentista para exploración de diseño, salud y equipamiento profesional">Silla de dentista</button>
-        <button class="model-option" data-src="models/Blocks%20Lab%20Equipment.glb" data-title="Equipo de química" data-alt="Modelo 3D de equipo de laboratorio para exploración científica en realidad aumentada">Equipo de química</button>
-        <button class="model-option" data-src="models/Drone.glb" data-title="Drone" data-alt="Modelo 3D de drone para exploración tecnológica en realidad aumentada">Drone</button>
-        <button class="model-option" data-src="models/VR%20Headset.glb" data-title="Casco de realidad virtual" data-alt="Modelo 3D de casco de realidad virtual para exploración de tecnología inmersiva">Casco de realidad virtual</button>
-      </div>
-      <p id="model-status" class="model-status">Modelo activo: Esqueleto.</p>
-
       <h2>Actividad sugerida</h2>
       <p>Usa este prototipo para observar objetos tridimensionales, manipularlos y analizar cómo cambia la comprensión al verlos en escala espacial.</p>
 
       <div class="activity">
         <strong>Indicaciones para estudiantes</strong>
         <ol>
-          <li>Selecciona un modelo 3D.</li>
+          <li>Selecciona un modelo 3D desde los botones superiores.</li>
           <li>Gira el modelo con el dedo o el mouse.</li>
           <li>Haz acercamiento para revisar detalles.</li>
           <li>Desde celular, presiona <strong>Ver en realidad aumentada</strong>.</li>
@@ -260,26 +276,26 @@
     const viewer = document.querySelector('#viewer');
     const status = document.querySelector('#model-status');
     const options = document.querySelectorAll('.model-option');
+    let activeTitle = 'Corazón';
 
     options.forEach((button) => {
       button.addEventListener('click', () => {
         options.forEach((item) => item.classList.remove('active'));
         button.classList.add('active');
 
-        const src = button.dataset.src;
-        const title = button.dataset.title;
-        const alt = button.dataset.alt;
-
-        viewer.src = src;
-        viewer.alt = alt;
-        status.textContent = `Modelo activo: ${title}.`;
+        activeTitle = button.dataset.title;
+        status.textContent = `Cargando modelo: ${activeTitle}.`;
+        viewer.src = button.dataset.src;
+        viewer.alt = button.dataset.alt;
       });
     });
 
+    viewer.addEventListener('load', () => {
+      status.textContent = `Modelo activo: ${activeTitle}.`;
+    });
+
     viewer.addEventListener('error', () => {
-      const activeButton = document.querySelector('.model-option.active');
-      const title = activeButton ? activeButton.dataset.title : 'seleccionado';
-      status.textContent = `No se pudo cargar el modelo ${title}. Revisa que el archivo exista en models/ y que el nombre coincida exactamente.`;
+      status.textContent = `No se pudo cargar el modelo ${activeTitle}. Revisa que el archivo exista en models/ y que el nombre coincida exactamente.`;
     });
   </script>
 </body>
