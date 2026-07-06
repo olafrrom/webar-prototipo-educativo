@@ -117,6 +117,39 @@
       border-radius: 14px;
     }
 
+    .model-selector {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0 18px;
+    }
+
+    .model-option {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #ffffff;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .model-option:hover,
+    .model-option.active {
+      border-color: var(--accent);
+      color: var(--accent-dark);
+      background: #f7faff;
+    }
+
+    .model-status {
+      min-height: 22px;
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
     ol,
     ul {
       padding-left: 22px;
@@ -180,6 +213,7 @@
   <main>
     <section class="viewer-card" aria-label="Visor 3D con realidad aumentada">
       <model-viewer
+        id="viewer"
         src="models/Astronaut.glb"
         alt="Modelo 3D educativo para exploración en realidad aumentada"
         ar
@@ -203,6 +237,15 @@
       <span class="tag">Modelo 3D</span>
       <span class="tag">Prototipo educativo</span>
 
+      <h2>Selecciona un modelo</h2>
+      <div class="model-selector" aria-label="Selector de modelos 3D">
+        <button class="model-option active" data-src="models/Astronaut.glb" data-title="Astronauta" data-alt="Modelo 3D de astronauta para exploración en realidad aumentada">Astronauta</button>
+        <button class="model-option" data-src="models/Molecula.glb" data-title="Molécula" data-alt="Modelo 3D de molécula para exploración científica en realidad aumentada">Molécula</button>
+        <button class="model-option" data-src="models/Corazon.glb" data-title="Corazón" data-alt="Modelo 3D de corazón para exploración anatómica en realidad aumentada">Corazón</button>
+        <button class="model-option" data-src="models/Planeta.glb" data-title="Planeta" data-alt="Modelo 3D de planeta para exploración astronómica en realidad aumentada">Planeta</button>
+      </div>
+      <p id="model-status" class="model-status">Modelo activo: Astronauta.</p>
+
       <h2>Actividad sugerida</h2>
       <p>
         Usa este prototipo para observar un objeto tridimensional, manipularlo y analizar cómo cambia la comprensión al verlo en escala espacial.
@@ -211,6 +254,7 @@
       <div class="activity">
         <strong>Indicaciones para estudiantes</strong>
         <ol>
+          <li>Selecciona un modelo 3D.</li>
           <li>Gira el modelo con el dedo o el mouse.</li>
           <li>Haz acercamiento para revisar detalles.</li>
           <li>Desde celular, presiona <strong>Ver en realidad aumentada</strong>.</li>
@@ -239,5 +283,32 @@
       Proyecto base para crear visualizaciones educativas WebAR con HTML, modelos .glb y GitHub Pages.
     </p>
   </footer>
+
+  <script>
+    const viewer = document.querySelector('#viewer');
+    const status = document.querySelector('#model-status');
+    const options = document.querySelectorAll('.model-option');
+
+    options.forEach((button) => {
+      button.addEventListener('click', () => {
+        options.forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+
+        const src = button.dataset.src;
+        const title = button.dataset.title;
+        const alt = button.dataset.alt;
+
+        viewer.src = src;
+        viewer.alt = alt;
+        status.textContent = `Modelo activo: ${title}.`;
+      });
+    });
+
+    viewer.addEventListener('error', () => {
+      const activeButton = document.querySelector('.model-option.active');
+      const title = activeButton ? activeButton.dataset.title : 'seleccionado';
+      status.textContent = `No se encontró el modelo ${title}. Sube el archivo correspondiente en la carpeta models/.`;
+    });
+  </script>
 </body>
 </html>
