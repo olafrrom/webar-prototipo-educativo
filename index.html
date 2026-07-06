@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototipo WebAR Educativo</title>
+
+  <!-- <model-viewer> permite visualizar modelos 3D y activar AR desde navegador compatible. -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #5b6475;
+      --accent: #1f6feb;
+      --accent-dark: #174ea6;
+      --border: #d9e1f2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      padding: 28px 18px 16px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    main {
+      width: min(1100px, 94vw);
+      margin: 0 auto 40px;
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: 20px;
+    }
+
+    .viewer-card,
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: 0 14px 40px rgba(21, 34, 66, 0.08);
+      overflow: hidden;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 72vh;
+      min-height: 480px;
+      background: linear-gradient(180deg, #ffffff, #eef3ff);
+    }
+
+    .info-card {
+      padding: 22px;
+    }
+
+    .info-card h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      margin: 0 6px 8px 0;
+      border-radius: 999px;
+      background: #eaf1ff;
+      color: var(--accent-dark);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .activity {
+      margin-top: 18px;
+      padding: 16px;
+      border-left: 4px solid var(--accent);
+      background: #f7faff;
+      border-radius: 14px;
+    }
+
+    ol,
+    ul {
+      padding-left: 22px;
+    }
+
+    .ar-button {
+      background: var(--accent);
+      color: white;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(31, 111, 235, 0.28);
+    }
+
+    .ar-button:hover {
+      background: var(--accent-dark);
+    }
+
+    .ar-note {
+      display: block;
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    footer {
+      width: min(1100px, 94vw);
+      margin: 0 auto 28px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 850px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      model-viewer {
+        height: 62vh;
+        min-height: 380px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Prototipo WebAR Educativo</h1>
+    <p>
+      Visualiza un modelo 3D en navegador y actívalo en realidad aumentada desde un celular compatible.
+    </p>
+  </header>
+
+  <main>
+    <section class="viewer-card" aria-label="Visor 3D con realidad aumentada">
+      <model-viewer
+        src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+        alt="Modelo 3D educativo para exploración en realidad aumentada"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        camera-controls
+        touch-action="pan-y"
+        auto-rotate
+        shadow-intensity="1"
+        exposure="1"
+        environment-image="neutral"
+        poster="assets/poster-placeholder.svg">
+
+        <button class="ar-button" slot="ar-button">
+          Ver en realidad aumentada
+        </button>
+      </model-viewer>
+    </section>
+
+    <aside class="info-card">
+      <span class="tag">WebAR</span>
+      <span class="tag">Modelo 3D</span>
+      <span class="tag">Prototipo educativo</span>
+
+      <h2>Actividad sugerida</h2>
+      <p>
+        Usa este prototipo para observar un objeto tridimensional, manipularlo y analizar cómo cambia la comprensión al verlo en escala espacial.
+      </p>
+
+      <div class="activity">
+        <strong>Indicaciones para estudiantes</strong>
+        <ol>
+          <li>Gira el modelo con el dedo o el mouse.</li>
+          <li>Haz acercamiento para revisar detalles.</li>
+          <li>Desde celular, presiona <strong>Ver en realidad aumentada</strong>.</li>
+          <li>Coloca el modelo en una superficie iluminada.</li>
+        </ol>
+      </div>
+
+      <h2>Preguntas de observación</h2>
+      <ul>
+        <li>¿Qué detalles se comprenden mejor en 3D que en una imagen plana?</li>
+        <li>¿Qué cambia cuando el objeto se observa en el espacio físico?</li>
+        <li>¿Cómo usarías este recurso para explicar un concepto científico?</li>
+      </ul>
+
+      <p class="ar-note">
+        Nota: el botón AR aparece en dispositivos compatibles. En computadora funciona como visor 3D.
+      </p>
+    </aside>
+  </main>
+
+  <footer>
+    Proyecto base para crear visualizaciones educativas WebAR con HTML, modelos .glb y GitHub Pages.
+  </footer>
+</body>
+</html>
